@@ -31,7 +31,7 @@ function agregarAlCarrito(producto, cantidad = 1) {
 
 //cargando productos desde la base de datos
 document.addEventListener("DOMContentLoaded", () => {
-    const API_BASE = "http://localhost:8080/api";
+    const API_BASE = "https://backend-distribuidora-production.up.railway.app/api";
     const container = document.getElementById('seccionOfertas');
     const containerProdNuevos= document.getElementById('seccionNuevos');
 
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Función para obtener el url de la imagen de un producto
     function getImageUrl(producto) {
-        return `http://localhost:8080/images/productos/${producto}.jpg`;
+        return `https://backend-distribuidora-production.up.railway.app/images/productos/${producto}.jpg`;
     }
 
     async function fetchProductosOferta() {
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="offer-tag fw-bold">¡OFERTA!</div>
                     <a href="producto-info.html?id=${p.id}">
                         <img src="${getImageUrl(p.nombre)}" alt="${p.nombre}"
-                        onerror="this.onerror=null; this.src='http://localhost:8080/images/default.jpg';">
+                        onerror="this.onerror=null; this.src='https://backend-distribuidora-production.up.railway.app/images/default.jpg';">
                     </a>
                     <small class="text-muted">*No aplica descuentos vigentes.</small>
                     <h6 class="mt-2 fw-bold text-danger fs-5">${p.cod}</h6>
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="offer-tag">MIRA LO <span class="fw-bold">NUEVO!</span></div>
                     <a href="producto-info.html?id=${p.id}">
                         <img src="${getImageUrl(p.nombre)}" alt="${p.nombre}"
-                        onerror="this.onerror=null; this.src='http://localhost:8080/images/default.jpg';">
+                        onerror="this.onerror=null; this.src='https://backend-distribuidora-production.up.railway.app/images/default.jpg';">
                     </a>
                     <h6 class="mt-2 fw-bold text-danger fs-5">${p.cod}</h6>
                     <p class="fs-5">${p.nombre}</p>

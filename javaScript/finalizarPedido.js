@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Función para obtener el url de la imagen de un producto
   function getImageUrl(producto) {
-    return `http://localhost:8080/images/productos/${producto}.jpg`;
+    return `https://backend-distribuidora-production.up.railway.app/images/productos/${producto}.jpg`;
   }
 
 // Funciones para manejar datos en el localStorage
@@ -55,7 +55,7 @@ let totalPedidoCompra = 0;
         itemPedido.innerHTML = `
             <div class="d-flex align-items-center">
                 <img src="${getImageUrl(producto.nombre)}" alt="${producto.nombre}" class="product-img-pedidoFinal me-2 ms-3" 
-                onerror="this.onerror=null; this.src='http://localhost:8080/images/default.jpg';">
+                onerror="this.onerror=null; this.src='https://backend-distribuidora-production.up.railway.app/images/default.jpg';">
                 <span class="text-truncate product-name ms-4">${producto.nombre}</span>
             </div>
             <div class="d-flex align-items-center product-actions me-4">
@@ -133,7 +133,7 @@ formPedido.addEventListener('submit', function(event) {
   verificarStock();
   
   async function verificarStock(){
-    const res = await fetch("http://localhost:8080/api/pedidos/check-stock", {
+    const res = await fetch("https://backend-distribuidora-production.up.railway.app/api/pedidos/check-stock", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(productosPedido)
@@ -214,7 +214,7 @@ async function realizarPedido(){
     "items" : productosPedido 
   }
 
-  const res = await fetch("http://localhost:8080/api/pedidos", {
+  const res = await fetch("https://backend-distribuidora-production.up.railway.app/api/pedidos", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(infoPedido)

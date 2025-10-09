@@ -30,7 +30,7 @@ function agregarAlCarrito(producto, cantidad = 1) {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const API_BASE = "http://localhost:8080/api";
+    const API_BASE = "https://backend-distribuidora-production.up.railway.app/api";
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
     const detalleContainer = document.getElementById("product-detail");
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Función para armar URL de imagen
   function getImageUrl(productId) {
-    return `http://localhost:8080/images/productos/${productId}.jpg`;
+    return `https://backend-distribuidora-production.up.railway.app/images/productos/${productId}.jpg`;
   }
 
   async function CargarProducto() {
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="col-md-4 bg-white">
           <img src="${getImageUrl(producto.nombre)}" alt="${producto.nombre}" 
                class="img-fluid rounded shadow" style="width: 500px; height: 350px; object-fit: contain;"
-               onerror="this.onerror=null; this.src='http://localhost:8080/images/default.jpg';">
+               onerror="this.onerror=null; this.src='https://backend-distribuidora-production.up.railway.app/images/default.jpg';">
         </div>
         <div class="col-md-6 mt-4 mt-md-0">
           <h3 class="fw-bold text-danger">${producto.nombre}</h3>
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="product-card shadow">
             <a href="producto-info.html?id=${p.id}">
                 <img src="${getImageUrl(p.nombre)}" alt="${p.nombre}"
-                onerror="this.onerror=null; this.src='http://localhost:8080/images/default.jpg';">
+                onerror="this.onerror=null; this.src='https://backend-distribuidora-production.up.railway.app/images/default.jpg';">
             </a>
             <h6 class="mt-2 fw-bold text-danger fs-5">${p.cod}</h6>
             <p class="fs-5">${p.nombre}</p>

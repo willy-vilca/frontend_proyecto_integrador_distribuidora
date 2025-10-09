@@ -51,7 +51,7 @@ document.querySelectorAll('.dropdown-menu [data-bs-toggle="dropdown"]').forEach(
 
 // Función para obtener el url de la imagen de un producto
   function getImageUrl(producto) {
-    return `http://localhost:8080/images/productos/${producto}.jpg`;
+    return `https://backend-distribuidora-production.up.railway.app/images/productos/${producto}.jpg`;
   }
 
 // Funciones para manejar localStorage
@@ -82,7 +82,7 @@ function renderCarrito() {
     item.innerHTML = `
       <div class="d-flex align-items-center">
         <img src="${getImageUrl(producto.nombre)}" alt="${producto.nombre}" class="product-img me-2" 
-        onerror="this.onerror=null; this.src='http://localhost:8080/images/default.jpg';">
+        onerror="this.onerror=null; this.src='https://backend-distribuidora-production.up.railway.app/images/default.jpg';">
         <span class="text-truncate product-name">${producto.nombre}</span>
       </div>
       <div class="d-flex align-items-center product-actions">
