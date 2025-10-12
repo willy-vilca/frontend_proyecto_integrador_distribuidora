@@ -39,7 +39,7 @@ async function submitRegister() {
         contrasena: document.querySelector("#password").value.trim()
     };
 
-    const res = await fetch("https://backend-distribuidora-production.up.railway.app/api/auth/register", {
+    const res = await fetch("https://backend-proyecto-distribuidora-production.up.railway.app/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datosRegistro)

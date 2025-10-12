@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Función para obtener el url de la imagen de un producto
   function getImageUrl(producto) {
-    return `https://backend-distribuidora-production.up.railway.app/images/productos/${producto}.jpg`;
+    return `https://backend-proyecto-distribuidora-production.up.railway.app/images/productos/${producto}.jpg`;
   }
 
 // Funciones para manejar datos en el localStorage
@@ -56,7 +56,7 @@ let totalPedidoCompra = 0;
             <div class="d-flex align-items-center">
                 <a href="producto-info.html?id=${producto.id}">
                   <img src="${getImageUrl(producto.nombre)}" alt="${producto.nombre}" class="product-img-pedidoFinal me-2 ms-3" 
-                  onerror="this.onerror=null; this.src='https://backend-distribuidora-production.up.railway.app/images/default.jpg';">
+                  onerror="this.onerror=null; this.src='https://backend-proyecto-distribuidora-production.up.railway.app/images/default.jpg';">
                 </a>
                 <span class="text-truncate product-name ms-4"><a href="producto-info.html?id=${producto.id}" class="text-dark text-truncate product-name">${producto.nombre}</a></span>
             </div>
@@ -135,7 +135,7 @@ formPedido.addEventListener('submit', function(event) {
   verificarStock();
   
   async function verificarStock(){
-    const res = await fetch("https://backend-distribuidora-production.up.railway.app/api/pedidos/check-stock", {
+    const res = await fetch("https://backend-proyecto-distribuidora-production.up.railway.app/api/pedidos/check-stock", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(productosPedido)
@@ -216,7 +216,7 @@ async function realizarPedido(){
     "items" : productosPedido 
   }
 
-  const res = await fetch("https://backend-distribuidora-production.up.railway.app/api/pedidos", {
+  const res = await fetch("https://backend-proyecto-distribuidora-production.up.railway.app/api/pedidos", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(infoPedido)

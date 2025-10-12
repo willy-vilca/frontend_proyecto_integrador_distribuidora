@@ -45,7 +45,7 @@ function agregarAlCarrito(producto, cantidad = 1) {
 
 //cargando productos desde la base de datos
 document.addEventListener("DOMContentLoaded", () => {
-  const API_BASE = "https://backend-distribuidora-production.up.railway.app/api";
+  const API_BASE = "https://backend-proyecto-distribuidora-production.up.railway.app/api";
   const container = document.querySelector("#seccion-productos .row");
 
   if (!container) {
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Función para obtener el url de la imagen de un producto
   function getImageUrl(producto) {
-    return `https://backend-distribuidora-production.up.railway.app/images/productos/${producto}.jpg`;
+    return `https://backend-proyecto-distribuidora-production.up.railway.app/images/productos/${producto}.jpg`;
   }
 
   // Traer productos por subcategoría
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="product-card shadow">
           <a href="producto-info.html?id=${p.id}">
             <img src="${getImageUrl(p.nombre)}" alt="${p.nombre}"
-              onerror="this.onerror=null; this.src='https://backend-distribuidora-production.up.railway.app/images/default.jpg';">
+              onerror="this.onerror=null; this.src='https://backend-proyecto-distribuidora-production.up.railway.app/images/default.jpg';">
           </a>
           <h6 class="mt-2 fw-bold text-danger fs-5">${p.cod}</h6>
           <p class="fs-5">${p.nombre}</p>

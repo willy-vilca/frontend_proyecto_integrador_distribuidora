@@ -10,7 +10,7 @@ async function submitLogin() {
     contrasena: document.querySelector("#loginPassword").value.trim()
   };
 
-  const res = await fetch("https://backend-distribuidora-production.up.railway.app/api/auth/login", {
+  const res = await fetch("https://backend-proyecto-distribuidora-production.up.railway.app/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(datosLogin)
