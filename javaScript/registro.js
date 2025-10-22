@@ -14,6 +14,13 @@ async function submitRegister() {
         return;
     }
 
+    //patron para verificar si el campo dni tiene 8 números
+    const regexDni = /^[0-9]{8}$/;
+    if(!regexDni.test(document.getElementById('dni').value.trim())){
+        mostrarModal('DNI no Válido!','El DNI ingresado debe tener 8 números, intente nuevamente por favor.', undefined, 'dni');
+        return;
+    }
+
     //confirmacion de telefono y contraseña
     if(document.getElementById('telefono').value.trim() != document.getElementById('telefonoConfirmacion').value.trim()){
         mostrarModal('¡Teléfono no Válido!','Los campos del teléfono no coinciden, intente nuevamente por favor.', undefined, 'telefonoConfirmacion');
@@ -36,6 +43,7 @@ async function submitRegister() {
         nombre: document.querySelector("#nombre").value.trim(),
         telefono: document.querySelector("#telefono").value.trim(),
         correo: document.querySelector("#correo").value.trim(),
+        dni: document.querySelector("#dni").value.trim(),
         contrasena: document.querySelector("#password").value.trim()
     };
 

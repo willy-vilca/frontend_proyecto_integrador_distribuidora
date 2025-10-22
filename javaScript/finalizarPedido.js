@@ -3,10 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const campoNombre = document.getElementById('nombreUserPedido');
   const campoCorreo = document.getElementById('emailUserPedido');
   const campoTelefono = document.getElementById('telefonoUserPedido');
+  const campoDni = document.getElementById("dniUserPedido");
 
   campoNombre.value=usuario.nombre;
   campoCorreo.value=usuario.correo;
   campoTelefono.value=usuario.telefono;
+  campoDni.value=usuario.dni;
 });
 
 /*funcionalidades de la lista de productos del pedido*/
@@ -227,7 +229,9 @@ async function realizarPedido(){
     localStorage.removeItem('carrito');
     mostrarModal('¡Pedido creado Exitosamente!',`Muchas gracias por comprar con nosotros 
       <span class="fw-bold">${nombreUsuario}</span>, el código de tu orden es ${orderResp.orderId}. 
-      Tu pedido llegará entre 6 a 8 días laborales.`,'index.html');
+      Tu pedido llegará entre 6 a 8 días laborales.<br>
+      Puedes ver tus pedidos <a href="misPedidos.html" class="fw-bold link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+      aquí.</a>`,'index.html');
   }else {
     mostrarModal('Error al registrar el pedido', 'Lo sentimos, hubo un problema al momento de registrar el pedido, intentanlo nuevamente más tarde.');
   }

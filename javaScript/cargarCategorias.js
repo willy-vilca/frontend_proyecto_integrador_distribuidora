@@ -60,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
           const liSub = document.createElement('li');
           const aSub = document.createElement('a');
           aSub.className = 'dropdown-item subcategoria';
-          // asumo que el objeto s tiene id y nombre
           aSub.href = `productos.html?subcategoriaId=${s.id}`;
           aSub.textContent = s.nombre;
           liSub.appendChild(aSub);
