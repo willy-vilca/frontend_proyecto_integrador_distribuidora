@@ -40,14 +40,14 @@
 }
 
 .nombre-producto {
-  max-width: 45vw;
+  max-width: 25vw;
   font-size: 1rem;
   color: #333;
 }
 
 @media (max-width: 768px) {
   .nombre-producto {
-    max-width: 55vw;
+    max-width: 35vw;
     font-size: 0.95rem;
   }
 
@@ -58,6 +58,13 @@
   .img-producto-pedido {
     width: 70px;
     height: 65px;
+  }
+}
+
+@media (max-width: 430px) {
+  .nombre-producto {
+    max-width: 55vw;
+    font-size: 0.65rem;
   }
 }
 
