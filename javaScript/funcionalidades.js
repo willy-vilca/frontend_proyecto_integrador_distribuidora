@@ -11,8 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <i class="bi bi-person-circle me-2"></i> ${primerNombre}
         </button>
         <ul class="dropdown-menu text-center" aria-labelledby="userMenu">
-          <li><a class="dropdown-item" href="misPedidos.html">Mis pedidos</a></li>
-          <li><a class="dropdown-item text-danger" href="#" id="cerrarSesion">Cerrar sesión</a></li>
+          <li><a class="dropdown-item " href="cambiarcontraseña.html">Cambiar contraseña</a></li>
+          <li><a class="dropdown-item fw-semibold" href="misPedidos.html">Mis pedidos</a></li>
+          <li><a class="dropdown-item fw-bold" style="color:rgb(228, 30, 30);" href="#" id="cerrarSesion">Cerrar sesión</a></li>
         </ul>
       </div>
     `;
