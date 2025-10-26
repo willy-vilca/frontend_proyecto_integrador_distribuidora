@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const userSection = document.getElementById("seccionUsuario");
   const usuario = JSON.parse(localStorage.getItem("usuario"));
-  const primerNombre = usuario.nombre.trim().split(" ")[0];
 
   if (usuario) { //se verifica si el usuario ha iniciado sesión o no
+    const primerNombre = usuario.nombre.trim().split(" ")[0];
     userSection.innerHTML = `
       <div class="dropdown">
         <button class="btn btn-outline-danger py-3 px-xxl-5 dropdown-toggle backgroundHover-rojo d-flex align-items-center justify-content-center" 
@@ -18,6 +18,14 @@ document.addEventListener("DOMContentLoaded", () => {
         </ul>
       </div>
     `;
+
+    const botonVerMisPedidos = document.getElementById("botonVerMisPedidos");
+    botonVerMisPedidos.disabled=false;
+    
+    botonVerMisPedidos.addEventListener("click", (e) => {
+      e.preventDefault();
+      window.location.href = "misPedidos.html";
+    })
 
     document.getElementById("cerrarSesion").addEventListener("click", (e) => {
       e.preventDefault();
