@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const userSection = document.getElementById("seccionUsuario");
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
-  if (usuario) { //se verifica si el usuario ha iniciado sesión o no
+  if (usuario) { 
     const primerNombre = usuario.nombre.trim().split(" ")[0];
     userSection.innerHTML = `
       <div class="dropdown">
