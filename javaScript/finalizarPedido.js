@@ -193,6 +193,8 @@ function culqi() {
     console.log("Orden generada:", Culqi.order);
   } else {
     console.error("Error en pago:", Culqi.error);
+    Culqi.close();
+    realizarPedido();
   }
 }
 
