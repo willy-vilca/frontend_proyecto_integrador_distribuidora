@@ -68,7 +68,7 @@ let totalPedidoCompra = 0;
                     <input type="text" class="form-control text-center cantidadProducto" value="${producto.cantidad}" readonly>
                     <button class="btn" onclick="cambiarCantidadPedido(${producto.id}, 1)">+</button>
                 </div>
-                <span class="text-danger fw-bold me-4">Total: S/.${subtotalPedido.toLocaleString()}</span>
+                <span class="text-danger fw-bold me-4">Total: S/.${parseFloat(subtotalPedido).toFixed(2)}</span>
                 <button class="btn btn-remove ms-5" onclick="eliminarProductoPedido(${producto.id})">✕</button>
             </div>
         `;
@@ -77,9 +77,9 @@ let totalPedidoCompra = 0;
       totalNeto = TotalPedido-descuento;
       totalPedidoCompra = totalNeto;
 
-      pedidoTotal.textContent = "S/." + TotalPedido.toLocaleString();
-      descuentoPedido.textContent = "S/." + descuento.toLocaleString();
-      totalPedidoNeto.textContent = "S/." + totalNeto.toLocaleString();
+      pedidoTotal.textContent = "S/." + parseFloat(TotalPedido).toFixed(2);
+      descuentoPedido.textContent = "S/." + parseFloat(descuento).toFixed(2);
+      totalPedidoNeto.textContent = "S/." + parseFloat(totalNeto).toFixed(2);
     }
 
     function cambiarCantidadPedido(id, delta) {
@@ -107,9 +107,9 @@ let totalPedidoCompra = 0;
 const formPedido = document.getElementById('formPedido');
 formPedido.addEventListener('submit', function(event) {
   event.preventDefault();
-  //validamos que la compra sea mayor a S/300
-  if(totalPedidoCompra<300){
-    mostrarModal('¡Monto Mínimo no Alcanzado!','El monto mínimo de compra en línea es de S/.300, agregue más productos por favor.');
+  //validamos que la compra sea mayor a S/100
+  if(totalPedidoCompra<100){
+    mostrarModal('¡Monto Mínimo no Alcanzado!','El monto mínimo de compra en línea es de S/.100, agregue más productos por favor.');
     return;
   }
 
