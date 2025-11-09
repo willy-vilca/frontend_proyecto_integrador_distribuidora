@@ -139,6 +139,11 @@ function cambiarCantidad(id, delta) {
 
   producto.cantidad += delta;
   if (producto.cantidad < 1) producto.cantidad = 1;
+  if (producto.cantidad > producto.stock){
+    producto.cantidad = producto.stock;
+    mostrarModalMensaje(`Lo Sentimos, no contamos con más unidades de este producto, 
+    el stock disponible es de <strong>${producto.stock} Unidades.</strong>`);
+  }
 
   saveCarrito(carrito);
   renderCarrito();
@@ -378,7 +383,7 @@ function mostrarModalMensaje(mensaje, tipo = "info") {
             ? "bg-success text-white"
             : tipo === "error"
             ? "bg-danger text-white"
-            : "bg-secondary text-white"
+            : "background-rojo text-white"
         } p-2">
           <h6 class="modal-title m-0">${
             tipo === "success"
@@ -404,5 +409,5 @@ function mostrarModalMensaje(mensaje, tipo = "info") {
   setTimeout(() => {
     modalBootstrap.hide();
     setTimeout(() => modal.remove(), 500);
-  }, 3000);
+  }, 6000);
 }
