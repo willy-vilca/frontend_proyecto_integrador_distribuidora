@@ -25,6 +25,13 @@ function getProductosPedido() {
 
 function saveProductosPedido(carrito) {
   localStorage.setItem("carrito", JSON.stringify(carrito));
+  actualizarBotonCarrito();
+}
+
+function actualizarBotonCarrito(){
+  const botonPrincipal = document.getElementById('carritoBotonPrincipal');
+  let cantidadProductosCarrito = getCarrito().length;
+  botonPrincipal.innerHTML = `CARRITO <span class='fw-medium'>(${cantidadProductosCarrito})</span>`;
 }
 
 let totalPedidoCompra = 0;

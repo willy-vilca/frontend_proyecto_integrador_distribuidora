@@ -5,6 +5,13 @@ function getCarrito() {
 
 function saveCarrito(carrito) {
   localStorage.setItem("carrito", JSON.stringify(carrito));
+  actualizarBotonCarrito();
+}
+
+function actualizarBotonCarrito(){
+  const botonPrincipal = document.getElementById('carritoBotonPrincipal');
+  let cantidadProductosCarrito = getCarrito().length;
+  botonPrincipal.innerHTML = `CARRITO <span class='fw-medium'>(${cantidadProductosCarrito})</span>`;
 }
 
 
