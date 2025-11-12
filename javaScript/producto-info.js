@@ -6,12 +6,28 @@ function getCarrito() {
 function saveCarrito(carrito) {
   localStorage.setItem("carrito", JSON.stringify(carrito));
   actualizarBotonCarrito();
+  actualizarBotonFlotanteCarrito();
 }
 
 function actualizarBotonCarrito(){
   const botonPrincipal = document.getElementById('carritoBotonPrincipal');
   let cantidadProductosCarrito = getCarrito().length;
-  botonPrincipal.innerHTML = `CARRITO <span class='fw-medium'>(${cantidadProductosCarrito})</span>`;
+  if (cantidadProductosCarrito > 0) {
+    botonPrincipal.innerHTML = `CARRITO <span class='fw-medium'>(${cantidadProductosCarrito})</span>`;
+  } else {
+    botonPrincipal.innerHTML = `CARRITO`;
+  }
+}
+
+function actualizarBotonFlotanteCarrito(){
+  const botonFlotante = document.getElementById('burbujaCarrito');
+  let cantidadProductosCarrito = getCarrito().length;
+  botonFlotante.textContent = cantidadProductosCarrito;
+  if (cantidadProductosCarrito > 0) {
+  botonFlotante.classList.add('show');
+  } else {
+    botonFlotante.classList.remove('show');
+  }
 }
 
 
