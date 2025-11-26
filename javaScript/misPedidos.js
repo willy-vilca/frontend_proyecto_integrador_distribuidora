@@ -236,7 +236,7 @@ async function generarComprobantePDF(nombre,dni,correo,fecha,total,idPedido) {
         qrContainer.style.display = "inline-block";
 
         new QRCode(qrContainer, {
-            text: "https://willy-vilca.github.io/FrontEnd-Proyecto-Distribuidora/misPedidos.html",
+            text: "https://distribuidora-san-martin.vercel.app/misPedidos.html",
             width: 128,
             height: 128,
             correctLevel: QRCode.CorrectLevel.H
