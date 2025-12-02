@@ -77,6 +77,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const id = params.get("id");
     const detalleContainer = document.getElementById("product-detail");
     const containerProductosRelacionados = document.querySelector("#seccion-productos .row");
+    let paginaProducto = 2;
+    let idSubcategoriaActual;
+    let idProductoActual;
 
     if (!id) {
         detalleContainer.innerHTML = `<p class="text-center text-danger">No se especificó el producto.</p>`;
@@ -93,6 +96,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch(`${API_BASE}/productos/${id}`);
       if (!res.ok) throw new Error("Error cargando producto");
       const producto = await res.json();
+      idSubcategoriaActual = producto.subcategoriaId;
+      idProductoActual = producto.id;
 
       // cargar detalle del producto
       detalleContainer.innerHTML = `
@@ -129,15 +134,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  async function CargarProductosRelacionados(idSubcategoria, idProductoActual) {
+  async function CargarProductosRelacionados(idSubcategoria, idProductoActual, mostrarTodos = false) {
     try {
       const res = await fetch(`${API_BASE}/productos/subcategoria/${idSubcategoria}`);
       if (!res.ok) throw new Error("Error cargando relacionados");
       let productos = await res.json();
 
-      productos = productos.filter(p => p.id !== parseInt(idProductoActual));
-      productos = productos.slice(0, 4);
+      //si hay menos de 4 productos no se mostrará el boton mostrar más
+      if(productos.length <= 4){
+        document.getElementById('botonMostrarMas').style.display= 'none';
+      }
 
+      productos = productos.filter(p => p.id !== parseInt(idProductoActual));
+      if(!mostrarTodos){
+        productos = productos.slice(0, 4);
+      }
+      
       containerProductosRelacionados.innerHTML = "";
       if (productos.length === 0) {
         containerProductosRelacionados.innerHTML = "<p class='text-center'>No hay productos relacionados.</p>";
@@ -184,6 +196,35 @@ document.addEventListener("DOMContentLoaded", () => {
       containerProductosRelacionados.innerHTML = `<p class="text-center text-danger">Error cargando productos relacionados.</p>`;
     }
   }
+
+  function mostrarSiguienteBloque(){
+    const botonPaginacion = document.getElementById('botonMostrarMas');
+    if(paginaProducto <= 2){
+      CargarProductosRelacionados(idSubcategoriaActual, idProductoActual, true);
+    }
+    
+    //se cambia el contenido del boton cuando se llega a la última página
+    if(paginaProducto == 2){
+      botonPaginacion.innerHTML = 'Mostrar Menos <i class="bi bi-chevron-double-up"></i>'; 
+    }
+
+    //se vuelven a mostrar solo los primeros productos
+    if(paginaProducto > 2){
+      CargarProductosRelacionados(idSubcategoriaActual, idProductoActual, false);
+      botonPaginacion.innerHTML = 'Mostrar Más <i class="bi bi-chevron-double-down"></i>';
+      window.scrollTo({ top: 1050, behavior: "smooth" }); 
+      paginaProducto = 2;
+      return;
+    }
+
+    paginaProducto += 1;
+
+  }
+
+  const botonPaginacion = document.getElementById('botonMostrarMas');
+  botonPaginacion.addEventListener('click', function() {
+    mostrarSiguienteBloque();
+  });
 
   CargarProducto();
 });

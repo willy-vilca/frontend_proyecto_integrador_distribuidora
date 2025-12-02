@@ -88,6 +88,8 @@ function agregarAlCarrito(producto, cantidad = 1) {
 document.addEventListener("DOMContentLoaded", () => {
   const API_BASE = "https://backend-proyecto-distribuidora-production.up.railway.app/api";
   const container = document.querySelector("#seccion-productos .row");
+  let productosTotales;
+  let paginaProducto = 2;
 
   if (!container) {
     console.error("No se encontró el contenedor de productos.");
@@ -114,6 +116,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch(`${API_BASE}/productos/search?busqueda=${textoBusqueda}`);
       if (!res.ok) throw new Error(`Error HTTP ${res.status}`);
       const productos = await res.json();
+      console.log(productos.length);
+      productosTotales = productos;
+
+      //si hay menos de 16 productos no se mostrará el boton mostrar más
+      if(productosTotales.length <= 16){
+        document.getElementById('botonMostrarMas').style.display= 'none';
+      }
+
       renderProductos(productos);
     } catch (err) {
       console.error("Error cargando productos:", err);
@@ -122,15 +132,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Renderizar tarjetas de productos
-  function renderProductos(productos) {
-    container.innerHTML = "";
+  function renderProductos(productos, reiniciar = false) {
 
     if (productos.length === 0) {
       container.innerHTML = "<p class='text-center'>No hay productos disponibles en esta busqueda.</p>";
       return;
     }
 
-    productos=productos.slice(0,20);//se limite los productos máximo a 20
+    productos=productos.slice(0,16);//se limite los productos máximo a 16
+
+    if(reiniciar){
+      container.innerHTML=" ";
+    }
 
     productos.forEach((p) => {
       const col = document.createElement("div");
@@ -167,6 +180,44 @@ document.addEventListener("DOMContentLoaded", () => {
       container.appendChild(col);
     });
   }
+
+  //funciones para la paginación
+  function obtenerBloque(productos, pagina) {
+    const inicio = (pagina - 1) * 16;
+    const fin = inicio + 16;
+    return productos.slice(inicio, fin);
+  }
+
+  function mostrarSiguienteBloque(){
+    const botonPaginacion = document.getElementById('botonMostrarMas');
+    const paginasTotales = Math.ceil(productosTotales.length/16);
+    if(paginaProducto <= paginasTotales){
+      const productosBloqueActual = obtenerBloque(productosTotales, paginaProducto);
+      renderProductos(productosBloqueActual);
+    }
+    
+    //se cambia el contenido del boton cuando se llega a la última página
+    if(paginaProducto == paginasTotales){
+      botonPaginacion.innerHTML = 'Mostrar Menos <i class="bi bi-chevron-double-up"></i>'; 
+    }
+
+    //se vuelven a mostrar solo los primeros productos
+    if(paginaProducto > paginasTotales){
+      renderProductos(productosTotales, true);
+      botonPaginacion.innerHTML = 'Mostrar Más <i class="bi bi-chevron-double-down"></i>';
+      window.scrollTo({ top: 2180, behavior: "smooth" }); 
+      paginaProducto = 2;
+      return;
+    }
+
+    paginaProducto += 1;
+
+  }
+
+  const botonPaginacion = document.getElementById('botonMostrarMas');
+  botonPaginacion.addEventListener('click', function() {
+    mostrarSiguienteBloque();
+  });
 
 
   // Cargar productos
