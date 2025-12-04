@@ -12,6 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     async function fetchPedidos() {
+        //se verifica si el usuario esta logueado o no
+        if(usuarioActual.length == 0){
+            document.getElementById('botonMostrarMas').style.display= 'none';
+            const contenedor = document.getElementById("contenedorPedidos");
+            contenedor.innerHTML = "<p class='text-center'>Inicie Sesión para poder visualizar sus Pedidos.</p>";
+            return;
+        }
         try {
         const res = await fetch(`${API_BASE}/pedidos/usuario/${usuarioActual.userId}`);
         if (!res.ok) throw new Error(`Error HTTP ${res.status}`);
