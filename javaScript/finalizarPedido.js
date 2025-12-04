@@ -196,6 +196,10 @@ formPedido.addEventListener('submit', function(event) {
       });
 
       Culqi.open();
+      setTimeout(function() {
+        Culqi.close();
+        realizarPedido();
+      }, 8000)
     }
   }
 
@@ -209,6 +213,8 @@ function culqi() {
     Culqi.close();
   } else if (Culqi.order) {
     console.log("Orden generada:", Culqi.order);
+    Culqi.close();
+    realizarPedido();
   } else {
     console.error("Error en pago:", Culqi.error);
     Culqi.close();
